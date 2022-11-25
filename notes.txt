@@ -1,0 +1,59 @@
+node express: es un framework de nodejs que nos permite crear aplicaciones web de forma rápida y sencilla. 
+
+
+--usare import para node y react, se añade type:module en el package.json
+
+
+-The middleware in node. js is a function that will have all the access for requesting an object, responding to an object, and moving to the next middleware function in the application request-response cycle-- poner siempre el callback next()
+req, res
+
+
+trim: para los espacios innecesarios en los strings
+unique: para que no se repitan los emails
+role: para que no se repitan los roles, usuario y admin
+
+timestamps: para que se registren las fechas de creación y actualización de los datos
+
+Schema: es la estructura de la base de datos, es decir, los campos que va a tener la tabla
+
+middleware: es una función que se ejecuta antes de que llegue a la petición al controlador
+
+big crypt: es una función que encripta la contraseña
+
+hash: es una función que encripta la contraseña
+
+genSalt: cuan strong es la encriptación
+
+Morgan: es un middleware que nos permite ver las peticiones que se hacen al servidor
+
+dev: es un modo de morgan que nos permite ver las peticiones que se hacen al servidor
+
+Postamn: es una herramienta para hacer peticiones http a un servidor de forma sencilla y rápida (get, post, put, delete)
+
+destructuring es una forma de extraer propiedades de un objeto y asignarlas a variables
+
+
+slug: es una librería que nos permite crear urls amigables, ejemplo React js se convierte en react-js
+
+express formidable: es un middleware que nos permite subir archivos a un servidor  (npm i express-formidable)
+
+...: es un operador que nos permite extraer las propiedades de un objeto y asignarlas a un nuevo objeto (spread operator)
+
+buffer: es un objeto que nos permite manipular datos binarios (imagenes, videos, etc)
+
+populate: es una función que nos permite rellenar los campos de un objeto con los datos de otro objeto (relaciones) 
+
+fetch: es una función que nos permite hacer peticiones http a un servidor de forma sencilla y rápida (get, post, put, delete)   (fetch api) 
+
+
+fragment: es una etiqueta que nos permite agrupar elementos html sin necesidad de crear un div 
+
+props: es un objeto que nos permite pasar datos de un componente a otro componente 
+
+hook: es una función que nos permite ejecutar código en un componente de forma sencilla y rápida (useState, useEffect, useContext, useReducer, useRef, useImperativeHandle, useLayoutEffect, useCallback, useMemo, useDebugValue) 
+
+env: es un archivo que nos permite guardar variables de entorno (variables de configuración) 
+
+cors es un middleware que nos permite hacer peticiones http a un servidor de forma sencilla y rápida (get, post, put, delete) 
+
+children: es una propiedad que nos permite pasar elementos html a un componente  
