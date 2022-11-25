@@ -57,3 +57,5 @@ env: es un archivo que nos permite guardar variables de entorno (variables de co
 cors es un middleware que nos permite hacer peticiones http a un servidor de forma sencilla y rápida (get, post, put, delete) 
 
 children: es una propiedad que nos permite pasar elementos html a un componente  
+
+frontend: 
