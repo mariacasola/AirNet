@@ -77,7 +77,7 @@ export const login = async(req, res) => {
         // compare password
         const match = await comparePassword(password, user.password);
         if (!match) {
-            return res.json({ errror: 'Contraseña incorrecta' });
+            return res.json({ error: 'Contraseña incorrecta' });
         }
 
         // crear token firmado

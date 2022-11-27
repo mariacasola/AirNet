@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";  
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -9,21 +10,21 @@ export default function Login() {
     const [email, setEmail] = useState("majo@gmail.com");
     const [password, setPassword] = useState("123456");
 
-  
+  // hook
+  const {auth, setAuth} = useAuth();
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const {data} = await axios.post(
-            `${process.env.REACT_APP_API}/login`, 
-          {
-            email,
+          const {data} = await axios.post(`${process.env.REACT_APP_API}/login`, 
+          { email,
             password,
           }); 
           console.log(data);
           if(data?.error){
             toast.error(data.error);
           } else {
+            setAuth({ ...auth, token: data.token, user: data.user});
             toast.success("Acceso correcto");
           }
         } catch (err) {
