@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context/auth";
+import { useNavigate } from "react-router-dom";
 import Jumbotron from "../../components/cards/Jumbotron";  
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -12,6 +13,7 @@ export default function Login() {
 
   // hook
   const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,6 +29,7 @@ export default function Login() {
             localStorage.setItem('auth', JSON.stringify(data));
             setAuth({ ...auth, token: data.token, user: data.user});
             toast.success("Acceso correcto");
+            navigate("/dashboard");
           }
         } catch (err) {
           console.log(err);
