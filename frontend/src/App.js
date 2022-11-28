@@ -9,6 +9,14 @@ import PrivateRoute from "./components/routes/PrivateRoute";
 
 
 
+
+
+const PageNotFound = () =>{
+      return  <div className="d-flex justify-content-center align-items-center vh-100">
+        404 | Pagina no encontrada
+    </div>;
+};
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -21,6 +29,7 @@ export default function App() {
           <Route path='/dashboard' element={<PrivateRoute/>}>
             <Route path='' element={<Dashboard/>} />
           </Route>
+          <Route path="*" element={<PageNotFound/>} replace />
       </Routes>
     </BrowserRouter>
   );

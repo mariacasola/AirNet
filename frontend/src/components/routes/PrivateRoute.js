@@ -21,17 +21,10 @@ export default function PrivateRoute() {
                 setOk (false);
             }
         };
-        authCheck();
+
+        if (auth?.token) authCheck();
     }, [auth?.token]);
 
-    // useEffect(() => {
-    //     if (auth?.token) {
-    //         setOk(true);
-    //     } else {
-    //         setOk(false);
-
-    //     }
-    // }, [auth?.token]);
 
     return ok ? <Outlet /> : <Loading/>;
 
