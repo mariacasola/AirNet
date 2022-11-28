@@ -20,9 +20,7 @@ export default function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const {data} = await axios.post(
-            `${process.env.REACT_APP_API}/register`, 
-          {
+          const {data} = await axios.post('/register',{
             name,
             email,
             password,
