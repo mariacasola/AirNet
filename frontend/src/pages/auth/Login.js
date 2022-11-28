@@ -11,7 +11,7 @@ export default function Login() {
     const [password, setPassword] = useState("123456");
 
   // hook
-  const {auth, setAuth} = useAuth();
+  const [auth, setAuth] = useAuth();
 
   const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,6 +24,7 @@ export default function Login() {
           if(data?.error){
             toast.error(data.error);
           } else {
+            localStorage.setItem('auth', JSON.stringify(data));
             setAuth({ ...auth, token: data.token, user: data.user});
             toast.success("Acceso correcto");
           }
