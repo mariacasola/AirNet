@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import LoadingGIF from "../../images/loading.gif";
 
 export default function Loading (){
     //state
@@ -19,8 +20,9 @@ export default function Loading (){
         return () => clearInterval(interval);
     }, [count]);
 
-    return <div className="d-flex justify-content-center align-items-center vh-100">
-        Redireccionando en {count} segundos
-        </div>;
-    
+    return (
+    <div className="d-flex justify-content-center align-items-center vh-100">
+        <img src={LoadingGIF} alt="Cargando" style={{ width: '300px'}}/>
+        </div>
+    );
 }
