@@ -3,7 +3,7 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import AdminMenu from "../../components/nav/AdminMenu";
 
 
-export default function AdminDashboard(){
+export default function AdminCategory(){
     // context
     const [auth, setAuth] = useAuth();
 
@@ -19,14 +19,9 @@ export default function AdminDashboard(){
 
                     </div>
                     <div className="col-md-9">
-                    <div className="p-3 mt-2 mb-2 h4 bg-light">Admin Informacion</div>
+                    <div className="p-3 mt-2 mb-2 h4 bg-light">Administracion de Categorias</div>
 
-                    <ul className="list-group">
-                        <li className="list-group-item">{auth?.user?.name}</li>
-                        <li className="list-group-item">{auth?.user?.email}</li>
-                        <li className="list-group-item">Administrador</li>
-                    </ul>
-                       
+                       <p>Crear categoria desde</p>
                     </div>
 
                  </div>

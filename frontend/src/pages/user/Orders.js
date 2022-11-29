@@ -3,7 +3,7 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import UserMenu from "../../components/nav/UserMenu";
 
 
-export default function UserDashboard(){
+export default function UserOrders(){
     // context
     const [auth, setAuth] = useAuth();
 
@@ -19,15 +19,9 @@ export default function UserDashboard(){
 
                     </div>
                     <div className="col-md-9">
-                    <div className="p-3 mt-2 mb-2 h4 bg-light">Informacion del Usuario</div>
-
-                    <ul className="list-group">
-                        <li className="list-group-item">{auth?.user?.name}</li>
-                        <li className="list-group-item">{auth?.user?.email}</li>
-                    </ul>
-                       
+                        <div className="p-3 mt-2 mb-2 h4 bg-light">Ordenes</div>
+                        historial de ordenes de usuario                  
                     </div>
-
                  </div>
             </div>
         </>
