@@ -4,6 +4,8 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import AdminMenu from "../../components/nav/AdminMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
+import CategoryForm from "../../components/forms/CategoryForm";
+import { Modal } from "antd";
 
 
 export default function AdminCategory(){
@@ -13,6 +15,7 @@ export default function AdminCategory(){
     // state
     const [name, setName] = useState("");
     const [categories, setCategories] = useState([])
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         loadCategories();
@@ -58,18 +61,12 @@ export default function AdminCategory(){
                     <div className="col-md-9">
                     <div className="p-3 mt-2 mb-2 h4 bg-light">Administracion de Categorias</div>
 
-                    <div className="p-3">
-                        <form onSubmit={handleSubmit}>
-                            <input 
-                            type='text'
-                            className="form-control p-3"
-                            placeholder="Escribir el nombre de la categoria"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            />
-                            <button className="btn btn-primary mt-3">Enviar</button>
-                        </form>
-                    </div>
+                    <CategoryForm 
+                    value={name}
+                    setValue={setName}
+                    handleSubmit={handleSubmit}
+                    />
+
                     <hr/>
 
                     <div className="col">
