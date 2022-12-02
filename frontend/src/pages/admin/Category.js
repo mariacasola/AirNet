@@ -52,10 +52,21 @@ export default function AdminCategory(){
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            console.log('actualiza categoria', updatingName);
+            const {data} = await axios.put(`/category/${selected._id}`, {name: updatingName,
+            });
+            if(data?.error){
+                toast.error(data.error);
+            } else {
+                toast.success(`${data.name} se ha actualizado`);
+                setSelected(null);
+                setUpdatingName("");
+                loadCategories();
+                setVisible(false);
+            }
 
         } catch (err){
             console.log(err)
+            toast.error("La categoria ya existe");
 
         }
     }
