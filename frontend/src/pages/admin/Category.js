@@ -15,7 +15,7 @@ export default function AdminCategory(){
     // state
     const [name, setName] = useState("");
     const [categories, setCategories] = useState([])
-    const [visible, setVisible] = useState(false);
+    const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const [updatingName, setUpdatingName] = useState("");
 
@@ -61,7 +61,29 @@ export default function AdminCategory(){
                 setSelected(null);
                 setUpdatingName("");
                 loadCategories();
-                setVisible(false);
+                setOpen(false);
+            }
+
+        } catch (err){
+            console.log(err)
+            toast.error("La categoria ya existe");
+
+        }
+    };
+
+
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        try {
+            const {data} = await axios.delete(`/category/${selected._id}`);
+            if(data?.error){
+                toast.error(data.error);
+            } else {
+                toast.success(`${data.name} se ha eliminado`);
+                setSelected(null);
+                loadCategories();
+                setOpen(false);
             }
 
         } catch (err){
@@ -70,6 +92,7 @@ export default function AdminCategory(){
 
         }
     }
+
 
     return (
         <>
@@ -97,7 +120,7 @@ export default function AdminCategory(){
                             {categories?.map((c)=>(
 
                                 <button key={c._id} className="btn btn-outline-primary m-3" onClick={() =>{
-                                    setVisible(true);
+                                    setOpen(true);
                                     setSelected(c);
                                     setUpdatingName(c.name);
                                 }}>
@@ -108,15 +131,17 @@ export default function AdminCategory(){
                         </div>
 
                         <Modal 
-                            visible={visible}
-                            onOk={() => setVisible(false)}
-                            onCancel={()=> setVisible(false)}
+                            open={open}
+                            onOk={() => setOpen(false)}
+                            onCancel={()=> setOpen(false)}
                             footer={null}
                         >
                             <CategoryForm 
                                 value={updatingName}
                                 setValue={setUpdatingName}
                                 handleSubmit={handleUpdate}
+                                buttonText= 'Actualizar'
+                                handleDelete={handleDelete}
                                 />
                             
                             </Modal>

@@ -1,4 +1,10 @@
-export default function CategoryForm({value, setValue, handleSubmit}) {
+export default function CategoryForm({
+    value,
+    setValue,
+    handleSubmit,
+    buttonText = 'Enviar',
+    handleDelete
+    }) {
     return (
 
         <div className="p-3">
@@ -10,7 +16,14 @@ export default function CategoryForm({value, setValue, handleSubmit}) {
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 />
-                <button className="btn btn-primary mt-3">Enviar</button>
+                <div className="d-flex justify-content-between">
+                <button className="btn btn-primary mt-3">{buttonText}</button>
+                {handleDelete && (
+                    <button onClick={handleDelete} className="btn btn-danger mt-3">
+                        Eliminar
+                    </button> )}
+                </div>
+
             </form>
         </div>
     )
