@@ -16,6 +16,8 @@ export default function AdminCategory(){
     const [name, setName] = useState("");
     const [categories, setCategories] = useState([])
     const [visible, setVisible] = useState(false);
+    const [selected, setSelected] = useState(null);
+    const [updatingName, setUpdatingName] = useState("");
 
     useEffect(() => {
         loadCategories();
@@ -47,6 +49,17 @@ export default function AdminCategory(){
         }
     };
 
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        try {
+            console.log('actualiza categoria', updatingName);
+
+        } catch (err){
+            console.log(err)
+
+        }
+    }
+
     return (
         <>
             <Jumbotron title={`Holis ${auth?.user?.name}`} subTitle='Plataforma de Administrador'
@@ -72,12 +85,30 @@ export default function AdminCategory(){
                     <div className="col">
                             {categories?.map((c)=>(
 
-                                <button key={c._id} className="btn btn-outline-primary m-3">
+                                <button key={c._id} className="btn btn-outline-primary m-3" onClick={() =>{
+                                    setVisible(true);
+                                    setSelected(c);
+                                    setUpdatingName(c.name);
+                                }}>
                                 {c.name}
                                 </button>
 
                             ))}
                         </div>
+
+                        <Modal 
+                            visible={visible}
+                            onOk={() => setVisible(false)}
+                            onCancel={()=> setVisible(false)}
+                            footer={null}
+                        >
+                            <CategoryForm 
+                                value={updatingName}
+                                setValue={setUpdatingName}
+                                handleSubmit={handleUpdate}
+                                />
+                            
+                            </Modal>
                     </div>
                  </div>
             </div>
