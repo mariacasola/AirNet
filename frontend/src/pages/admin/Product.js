@@ -52,6 +52,22 @@ export default function AdminProduct(){
                     <div className="col-md-9">
                     <div className="p-3 mt-2 mb-2 h4 bg-light">Crear Producto</div>
 
+
+                    {photo && (
+                        <div className="text-center">
+                            <img 
+                            src={URL.createObjectURL(photo)}
+                            alt="foto del producto"
+                            className="img img=responsive"
+                            height='200px'
+                            />
+                        </div>
+                    )}
+
+
+
+
+
                     <div className="pt-2">
                         <label className="btn btn-outline-secondary col-12 mb-3">
                             {photo ? photo.name : 'Cargar imagen'}
