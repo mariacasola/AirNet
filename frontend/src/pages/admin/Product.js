@@ -52,6 +52,18 @@ export default function AdminProduct(){
                     <div className="col-md-9">
                     <div className="p-3 mt-2 mb-2 h4 bg-light">Crear Producto</div>
 
+                    <div className="pt-2">
+                        <label className="btn btn-outline-secondary col-12 mb-3">
+                            {photo ? photo.name : 'Cargar imagen'}
+                            <input 
+                            type='file' 
+                            name='photo' 
+                            accept='image/*' 
+                            onChange={(e) => setPhoto(e.target.files[0])}
+                            hidden />
+                        </label>
+                    </div>
+
 
                     <Select
                     showSearch
@@ -59,7 +71,7 @@ export default function AdminProduct(){
                     size="large" 
                     className="form-select mb-3" 
                     placeholder="Seleccione una categoria" 
-                    onChange={(value) =>{}}
+                    onChange={(value) => setCategory(value)}
                     >
                         {categories?.map((c) => (
                         <Option key={c._id} value={c.name}>
