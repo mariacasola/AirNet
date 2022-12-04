@@ -7,6 +7,7 @@ import React from 'react';
 import { Select } from 'antd';
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
+import { DEVICE_SIZES } from "react-bootstrap/esm/createUtilityClasses";
 
 const {Option} = Select;
 
@@ -71,7 +72,7 @@ export default function AdminProductUpdate(){
         e.preventDefault();
         try{
             const productData = new FormData();
-            productData.append("photo", photo);
+            photo && productData.append("photo", photo);
             productData.append("name", name);
             productData.append("description", description);
             productData.append("price", price);
@@ -79,7 +80,7 @@ export default function AdminProductUpdate(){
             productData.append("shipping", shipping);
             productData.append("quantity", quantity);
 
-            const {data} = await axios.post('/product', productData);
+            const {data} = await axios.put(`/product/${id}`, productData);
             if (data?.error) {
                 toast.error(data.error);
             } else {
@@ -92,6 +93,18 @@ export default function AdminProductUpdate(){
     }
 };
 
+    const handleDelete = async (req, res) => {
+        try {
+            let answer = window.confirm("Realmente desea eliminar este producto?");
+            if(!answer) return;
+            const {data} = await axios.delete(`/product/${id}`);
+            toast.success(`"${data.name}" ha sido eliminado`);
+            navigate("/dashboard/admin/products");
+        } catch (err) {
+            console.log(err);
+            toast.error("No se pudo eliminar");
+        }
+    };
     
 
 
@@ -110,13 +123,22 @@ export default function AdminProductUpdate(){
                     <div className="p-3 mt-2 mb-2 h4 bg-light">Actualizar Producto</div>
 
 
-                    {photo && (
+                    {photo ? (
                         <div className="text-center">
                             <img 
                             src={URL.createObjectURL(photo)}
                             alt="foto del producto"
                             className="img img=responsive"
                             height='200px'
+                            />
+                        </div>
+                    ) : (
+                        <div className="text-center">
+                            <img
+                                src={`${process.env.REACT_APP_API}/product/photo/${id}?${new Date().getTime()}`}
+                                alt="foto del producto"
+                                className="img img-responsive"
+                                height="200px"
                             />
                         </div>
                     )}
@@ -167,6 +189,7 @@ export default function AdminProductUpdate(){
                     className="form-select mb-3" 
                     placeholder="Seleccione una categoria" 
                     onChange={(value) => setCategory(value)}
+                    value={category}
                     >
                         {categories?.map((c) => (
                         <Option key={c._id} value={c._id}>
@@ -181,6 +204,7 @@ export default function AdminProductUpdate(){
                     className="form-select mb-3" 
                     placeholder="Seleccione Envio" 
                     onChange={(value) => setShipping(value)}
+                    value={shipping ? "Si" : "No"}
                     >
                         <Option value="0">No</Option>
                         <Option value="1">Si</Option>
@@ -196,7 +220,12 @@ export default function AdminProductUpdate(){
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
                     />
-                    <button onClick={handleSubmit} className="btn btn-primary mb-5">Enviar</button>
+
+                    <div className="d-flex justify-content-between">
+                    <button onClick={handleSubmit} className="btn btn-primary mb-5">Actualizar</button>
+                    <button onClick={handleDelete} className="btn btn-danger mb-5">Eliminar</button>
+                    </div>
+                    
                     
                        
                     </div>
