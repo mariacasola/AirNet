@@ -7,7 +7,7 @@ import React from 'react';
 import { Select } from 'antd';
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { DEVICE_SIZES } from "react-bootstrap/esm/createUtilityClasses";
+
 
 const {Option} = Select;
 

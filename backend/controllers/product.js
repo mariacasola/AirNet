@@ -11,19 +11,19 @@ export const create = async(req, res) => {
         // validation
         switch (true) {
             case !name.trim():
-                res.json({ error: "El nombre es requerido" });
+                return res.json({ error: "El nombre es requerido" });
             case !description.trim():
-                res.json({ error: "La descripción es requerida" });
+                return res.json({ error: "La descripción es requerida" });
             case !price.trim():
-                res.json({ error: "El precio es requerido" });
+                return res.json({ error: "El precio es requerido" });
             case !category.trim():
-                res.json({ error: "La categoría es requerida" });
+                return res.json({ error: "La categoría es requerida" });
             case !quantity.trim():
-                res.json({ error: "La cantidad es requerida" });
+                return res.json({ error: "La cantidad es requerida" });
             case !shipping.trim():
-                res.json({ error: "El envío es requerido" });
+               return  res.json({ error: "El envío es requerido" });
             case photo && photo.size > 1000000:
-                res.json({ error: "La imagen debe ser menor a 1MB" });
+                return res.json({ error: "La imagen debe ser menor a 1MB" });
         }
 
         // create product
