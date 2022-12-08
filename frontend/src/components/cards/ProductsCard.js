@@ -29,6 +29,17 @@ export default function ProductCard ({ p }) {
             
             <div className="card-body">
                 <h5>{p?.name}</h5>
+
+                <h4 className="fw-bold">
+                    {p?.price?.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD"
+                    })}
+
+                </h4>
+
+
+
                 <p className="card-text">{p?.description?.substring(0,60)}...</p>
 
             </div>

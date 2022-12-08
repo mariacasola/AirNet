@@ -25,7 +25,7 @@ export default function Home() {
 
     return (
         <div>
-          <Jumbotron title="Hola a todos" subTitle="Bienvenidos a Airnet"/>
+          <Jumbotron title="AirNet" subTitle="Productos Tecnologicos"/>
 
           <div className="row">
             <div className="col-md-6">
