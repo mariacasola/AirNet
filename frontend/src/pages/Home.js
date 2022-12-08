@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Jumbotron from "../components/cards/Jumbotron"; 
 import axios from "axios";
-import ProductCard from "../components/cards/ProductsCard";
+import ProductCard from "../components/cards/ProductCard";
 
 export default function Home() {
   const [products, setProducts] = useState([]);

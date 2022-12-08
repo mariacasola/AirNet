@@ -22,8 +22,13 @@ export default function Menu () {
         <>
             <ul className="nav d-flex justify-content-between shadow-sm mb-2">
                 <li className="nav-item">
-                    <NavLink className="nav-link" aria-current="page" to="/">INICIO</NavLink>
-             </li>
+                    <NavLink className="nav-link" aria-current="page" to="/">INICIO
+                    </NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" aria-current="page" to="/shop">COMPRAR
+                    </NavLink>
+                </li>
 
 
 
