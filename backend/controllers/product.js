@@ -137,3 +137,22 @@ export const update = async(req, res) => {
     }
 
 };
+
+export const filteredProducts = async (req, res) => {
+    try {
+        const { checked, radio } = req.body;
+        let args = {}; 
+        if (checked.length > 0) args.category = checked;
+        if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+
+        console.log('args => ', args );
+
+        const products = await Product.find(args);
+        console.log('consulta de productos filtrados', products.length);
+        res.json(products);
+
+
+    } catch (err) {
+        console.log(err)
+    }
+};

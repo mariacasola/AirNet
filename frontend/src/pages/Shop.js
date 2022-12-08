@@ -3,7 +3,8 @@ import Jumbotron from "../components/cards/Jumbotron";
 import axios from "axios";
 import ProductCard from "../components/cards/ProductCard";
 import { Checkbox, Radio } from "antd";
-import {prices} from "../prices"
+import {prices} from "../prices";
+
 
 
 export default function Shop() {
@@ -13,9 +14,34 @@ export default function Shop() {
     const [radio, setRadio] = useState([]); // radio)
 
 
+
     useEffect(() => {
-        loadProducts();
+        if(!checked.length || !radio.length) loadProducts();
     }, []);
+
+
+    useEffect(() => {
+        if(checked.length || radio.length) loadFilteredProducts();
+    }, [checked, radio]);
+
+
+
+
+
+    const loadFilteredProducts = async () => {
+        try {
+            const { data } = await axios.post('/filtered-products', {
+                checked,
+                radio,
+            });
+            console.log('profuctos filtrados => ', data);
+            setProducts(data);
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
+
 
     const loadProducts = async () => {
         try {
@@ -55,7 +81,7 @@ export default function Shop() {
     return <>
         <Jumbotron title="AirNet" subTitle="Productos Tecnologicos"/>
 
-        <pre>{JSON.stringify({checked,radio},null,4)}</pre>
+        {/* <pre>{JSON.stringify({checked,radio},null,4)}</pre> */}
 
         <div className="container-fluid">
             <div className="row">
@@ -86,8 +112,18 @@ export default function Shop() {
                                 </div>
                             ))}
                         </Radio.Group>
-
                     </div>
+
+
+                    <div className='p-5 pt-5'>
+                        <button 
+                        className="btn btn-outline-secondary col-12 "
+                        onClick={() => window.location.reload()}
+                        >
+                            Limpiar
+                        </button>
+                    </div>
+                
 
 
                 </div>
@@ -95,7 +131,8 @@ export default function Shop() {
                 <div className="col-md-9">
                     <h2 className="p-3 mt-2 mb-2 h4 bg-light text-center">{products?.length} Productos</h2>
 
-                    <div className="row">
+
+                    <div className="row" style={{ height: '100vh', overflow: 'scroll'}}>
                         {products?.map(p => (
                             <div className="col-md-4" key={p._id}>
                                 <ProductCard p={p} />
