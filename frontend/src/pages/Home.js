@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Jumbotron from "../components/cards/Jumbotron"; 
 import axios from "axios";
-import moment from "moment";
+import ProductCard from "../components/cards/ProductsCard";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -30,24 +30,28 @@ export default function Home() {
           <div className="row">
             <div className="col-md-6">
               <h2 className="p-3 mt-2 mb-2 h4 bg-light text-center">Lo ultimo!</h2>
-              {products?.map (p => (
-              <div>
-                <p>{p.name}</p>
-                <p>{moment(p.createdAt).fromNow()}</p>
-                <p>{p.sold}</p>
+              <div className="row">
+                {products?.map (p => (
+                  <div className="col-md-6" key={p._id}>
+                    <ProductCard p={p} />
+                  </div>
+                  
+                ))}
               </div>
-            ))}
+             
             </div>
 
             <div className="col-md-6">
               <h2 className="p-3 mt-2 mb-2 h4 bg-light text-center">Los mas vendidos!</h2>
-            {products?.map (p => (
-              <div>
-                <p>{p.name}</p>
-                <p>{moment(p.createdAt).fromNow()}</p>
-                <p>{p.sold}</p>
+              <div className="row">
+                {sortedBySold?.map (p => (
+                  <div className="col-md-6" key={p._id}>
+                    <ProductCard p={p} />
+                  </div>
+                  
+                ))}
+
               </div>
-            ))}
             </div>
 
           </div>
