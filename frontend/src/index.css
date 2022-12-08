@@ -17,6 +17,11 @@
   border-radius: 12px;
 }
 
+.ant-checkbox-wrapper:first-of-type {
+  margin-left: 8px;
+}
+
+
 
 /* jumbotron color animation css */
 .jumbotron {
@@ -64,3 +69,12 @@
   }
 }
 
+
+
+#airnet{
+  color: rgb(4, 4, 90);
+}
+
+.lead{
+  color: rgb(9, 5, 81);
+}
