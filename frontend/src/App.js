@@ -17,6 +17,7 @@ import Search from "./pages/Search";
 import ProductView from "./pages/ProductView";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import AdminRoute from "./components/routes/AdminRoute";
+import CategoriesList from "./pages/CategoriesList";
 
 
 
@@ -39,6 +40,7 @@ export default function App() {
       <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/categories' element={<CategoriesList />} />
           <Route path='/search' element={<Search />} />
           <Route path='/product/:slug' element={<ProductView />} />
           <Route path='/login' element={<Login />} />
