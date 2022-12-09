@@ -11,7 +11,7 @@ export default function Menu () {
     //hooks
     const categories = useCategory();
     const navigate = useNavigate();
-    console.log('categorias => ', categories)
+    // console.log('categorias => ', categories)
 
 
     const logout = () =>{
