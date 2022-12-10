@@ -1,6 +1,6 @@
 .active {
-  text-decoration: underline;
-  text-decoration-thickness: 3px;
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
 }
 
 .pointer {
@@ -81,3 +81,4 @@
 .lead{
   color: rgb(9, 5, 81);
 }
+

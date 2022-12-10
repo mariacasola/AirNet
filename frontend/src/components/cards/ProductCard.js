@@ -1,7 +1,13 @@
 import {useNavigate} from 'react-router-dom';
 import { Badge } from "antd";
+import { useCart } from '../../context/cart';
+import { toast } from 'react-hot-toast';
 
 export default function ProductCard ({ p }) {
+    // context
+    const [cart, setCart] = useCart();
+
+    // hooks
     const navigate = useNavigate();
 
     return (
@@ -55,14 +61,19 @@ export default function ProductCard ({ p }) {
                     Ver Producto
                 </button>
 
-                <button className="btn btn-outline-primary col card-button"
-                 style={{ borderBottomRightRadius: '5px'}}>
+                <button 
+                className="btn btn-outline-primary col card-button"
+                style={{ borderBottomRightRadius: '5px'}}
+                onClick={() => {
+                    setCart([...cart, p]);
+                    toast.success("Se agrego al carrito");
+                }}
+                >
                     Añadir al Carrito
                 </button>
             </div>
             
-            {/* <p>{moment(p.createdAt).fromNow()}</p>
-            <p>{p.sold}</p> */}
+
         </div>
     );
 }
