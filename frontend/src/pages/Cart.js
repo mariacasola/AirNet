@@ -15,10 +15,33 @@ export default function Cart () {
     // hooks
     const navigate = useNavigate();
 
+    const removeFromCart = (productId) => {
+        let myCart = [...cart];
+        let index = myCart.findIndex((item) => item._id === productId);
+        myCart.splice(index, 1);
+        setCart(myCart);
+        localStorage.setItem("cart", JSON.stringify(myCart));
+
+    };
+
+
+
+    const  cartTotal = () => {
+        let total = 0;
+        cart.map((item) => {
+            total += item.price;
+        });
+        return total.toLocaleString("en-US", {
+            style: 'currency',
+            currency: "USD",
+        });
+    }
+
+
     return (
         <>
             <Jumbotron title={`Hola ${auth?.token && auth?.user?.name}`} subTitle={
-                cart.length > 1 
+                cart.length  
                 ? `Hay ${cart?.length} productos en el carrito. ${auth?.token ? '' : 'Por favor inicie sesion para pagar'}`
                 : 'El carrito esta vacio'
                 }
@@ -29,7 +52,7 @@ export default function Cart () {
                 <div className='row'>
                     <div className='col-md-12'>
                         <div className='p-3 mt-2 mb-2 h4 bg-light text-center'>
-                            {cart?.length > 1 ? ("Mi Carrito"):( 
+                            {cart?.length ? ("Mi Carrito"):( 
                             <div className='text-center'>
                                 <button 
                                 className='btn btn-primary' 
@@ -43,13 +66,13 @@ export default function Cart () {
                 </div>
             </div>
 
-            {cart?.length > 1 && ( 
+            {cart?.length  && ( 
                 <div className='container'>
                     <div className='row'>
                         <div className='col-md-8'>
                             <div className='row'>
                                 {cart?.map((p) => (
-                                    <div key={p._id} className='card mb-3' style={{ maxWidth: 540}}>
+                                    <div key={p._id} className='card mb-3'>
                                         <div className='row g-0'>
                                             <div className='col-md-4'>
                                                 <img
@@ -67,20 +90,32 @@ export default function Cart () {
                                             <div className='col-md-8'>
                                                 <div className='card-body'>
                                                     <h5 className='card-title'>
-                                                        {p.name}
+                                                        {p.name}{" "}
+                                                        {p?.price?.toLocaleString
+                                                        ("en-US", {
+                                                            style: "currency",
+                                                            currency: "USD"
+                                                        })}
                                                     </h5>
                                                     <p className='card-text'>
                                                         {`${p?.description?.substring(0,50)}...`}
                                                     </p>
-                                                    <p className='card-text'>
-                                                        <small className='text-muted'> 
-                                                        Agregado {moment(p.createdAt).fromNow()}
-                                                        </small>
-                                                    </p>
-
-
+                                                    
                                                 </div>
+                                            </div>
 
+                                            <div className='d-flex justify-content-between'>
+                                                <p className='card-text'>
+                                                    <small className='text-muted'> 
+                                                        Agregado {moment(p.createdAt).fromNow()}
+                                                    </small>
+                                                    </p>
+                                                    <p 
+                                                    className='text-danger mb-2 pointer'
+                                                    onClick={() =>removeFromCart(p._id)}
+                                                    >
+                                                        Eliminar
+                                                    </p>
                                             </div>
                                             
                                             </div>
@@ -93,7 +128,10 @@ export default function Cart () {
                         </div>
 
                         <div className='col-md-3'>
+                            <h4>Subtotal</h4>
                             Total / Direccion / Medios de Pago
+                            <hr/>
+                            <h6>Total: {cartTotal()}</h6>
 
                         </div>
 

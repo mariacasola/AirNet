@@ -66,6 +66,7 @@ export default function ProductCard ({ p }) {
                 style={{ borderBottomRightRadius: '5px'}}
                 onClick={() => {
                     setCart([...cart, p]);
+                    localStorage.setItem("cart", JSON.stringify([...cart, p]));
                     toast.success("Se agrego al carrito");
                 }}
                 >
