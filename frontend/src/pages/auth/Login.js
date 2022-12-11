@@ -16,6 +16,9 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  //console.log('locacion =>>>>' , location)
+
+
   const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -42,7 +45,7 @@ export default function Login() {
         
     return (
         <div>
-          <Jumbotron title="Login"/>
+          <Jumbotron title="Iniciar Sesion"/>
 
 
           <div className="container mt-5">

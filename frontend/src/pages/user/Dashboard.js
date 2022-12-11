@@ -9,7 +9,7 @@ export default function UserDashboard(){
 
     return (
         <>
-            <Jumbotron title={`Holis ${auth?.user?.name}`} subTitle='Plataforma'
+            <Jumbotron title={`Hola ${auth?.user?.name}`} subTitle='Plataforma'
             />
 
             <div className="container-fluid">

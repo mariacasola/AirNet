@@ -71,8 +71,8 @@ export default function Cart () {
                     <div className='row'>
                         <div className='col-md-8'>
                             <div className='row'>
-                                {cart?.map((p) => (
-                                    <div key={p._id} className='card mb-3'>
+                                {cart?.map((p, index) => (
+                                    <div key={index} className='card mb-3'>
                                         <div className='row g-0'>
                                             <div className='col-md-4'>
                                                 <img
@@ -132,6 +132,42 @@ export default function Cart () {
                             Total / Direccion / Medios de Pago
                             <hr/>
                             <h6>Total: {cartTotal()}</h6>
+
+                            {auth?.user?.address ? (
+                                <>
+                                 <div className='mb-3'> <hr/>
+                                    <h4>Direccion:</h4>
+                                    <h5>{auth?.user?.address}</h5>
+                                 </div>
+                                 <button className='btn btn-outline-warning' onClick={() => navigate('/dashboard/user/profile')}>
+                                    Actualizar direccion
+                                 </button>
+
+                                </>
+
+                            ) :(
+                                <div className='mb-3'>
+                                    {auth?.token ? (
+                                        <button
+                                        className='btn btn-outline-warning'
+                                        onClick={() => navigate('/dashboard/user/profile')}
+                                        >
+                                            Indique direccion de envio
+                                        </button>
+                                    ) : (
+                                        <button 
+                                        className='btn btn-outline-danger mt-3'
+                                        onClick={() => navigate('/login', {
+                                            state: '/cart'
+                                        })}
+                                        >
+                                            Inicie sesion para comprar
+                                        </button>
+                                    )}
+
+                                </div>
+                            )}
+
 
                         </div>
 
