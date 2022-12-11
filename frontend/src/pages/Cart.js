@@ -55,7 +55,7 @@ export default function Cart () {
                         <div className='col-md-8'>
                             <div className='row'>
                                 {cart?.map((p, index) => (
-                                    <ProductCardHorizontal index={index} p={p}/>
+                                    <ProductCardHorizontal key={index} p={p}/>
                                 ))}
 
                             </div>

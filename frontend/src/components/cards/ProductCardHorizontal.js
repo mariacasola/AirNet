@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { useCart } from '../../context/cart';
 
-export default function ProductCardHorizontal({index, p}) {
+export default function ProductCardHorizontal({p}) {
 
     // constext
 
@@ -22,7 +22,7 @@ export default function ProductCardHorizontal({index, p}) {
 
 
     return (
-        <div key={index} className='card mb-3'>
+        <div className='card mb-3'>
         <div className='row g-0'>
          <div className='col-md-4'>
             <img

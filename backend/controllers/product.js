@@ -232,7 +232,7 @@ export const relatedProducts = async (req, res) => {
 };
 
 
-export const getToken = async () => {
+export const getToken = async (req, res) => {
     try {
         gateway.clientToken.generate({}, function (err, response){
             if (err) {
@@ -247,26 +247,34 @@ export const getToken = async () => {
 };
 
 
-export const processPayment = async () => {
+export const processPayment = async (req, res) => {
     try {
-        console.log(req.body);
 
-        let nonceFromTheClient = req.body.paymentMethodNonce;
+
+
+        const {nonce, cart} = req.body;
+
+        let total=0;
+        cart.map((i) => {
+            total += i.price;
+        });
+
+
+
 
         let newTransaction = gateway.transaction.sale({
-            amount: "150000",
-            paymentMethodNonce: nonceFromTheClient,
+            amount: total,
+            paymentMethodNonce: nonce,
             options: {
                 submitForSettlement: true,
             },
-
 
         }, 
         function (error, result){
             if(result){
                 res.send(result)
             } else {
-                res.status(500)
+                res.status(500).send(error);
             }
         });
     } catch(err) {
