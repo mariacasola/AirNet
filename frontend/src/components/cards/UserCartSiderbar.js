@@ -15,7 +15,7 @@ export default function UserCartSidebar () {
     // state 
     const [clientToken, setClientToken] = useState("");
     const [instance, setInstance] = useState("");
-
+    const [loading, setLoading] = useState (false);
     // hooks
     const navigate = useNavigate();
 
@@ -50,17 +50,20 @@ export default function UserCartSidebar () {
 
     const handleBuy = async () => {
         try {
+            setLoading(true);
             const { nonce } = await instance.requestPaymentMethod();
             const { data } = await axios.post("/braintree/payment", {
                 nonce,
                 cart,
             });
+            setLoading(false)
             localStorage.removeItem("cart")
             setCart([]);
             navigate("/dashboard/user/orders")
             toast.success("Pago exitoso")
         } catch (err){
             console.log(err)
+            setLoading(false)
         }
     }
 
@@ -124,9 +127,9 @@ export default function UserCartSidebar () {
                     />
                     <button onClick={handleBuy} 
                     className='btn btn-primary col-12 mt-2'
-                    disabled={!auth.user?.address || !instance}
+                    disabled={!auth.user?.address || !instance || loading}
                     >
-                        Pagar
+                        {loading ? "Procesando..." : " Pagar"}
                     </button>
                 </>
             
