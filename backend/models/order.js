@@ -8,14 +8,14 @@ const { ObjectId } = mongoose.Schema;
 
 
 
-const orderSchema = new mongoose.Schema({
+const orderSchema = new Schema({
     products: [{type: ObjectId, ref: "Product"}],
     payment: {},
     buyer: { type: ObjectId, ref: "User"},
     status: {
         type: String,
-        default: "Not processed",
-        enum: ['Not processed', 'Processing', 'Shipped', 'Delivered', 'Cancelled'],
+        default: "No procesado",
+        enum: ['No procesado', 'En proceso', 'Enviado', 'Entregado', 'Cancelado'],
     },
 },
  {timestamps: true}

@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { useCart } from '../../context/cart';
 
-export default function ProductCardHorizontal({p}) {
+export default function ProductCardHorizontal({p, remove=true}) {
 
     // constext
 
@@ -60,12 +60,15 @@ export default function ProductCardHorizontal({p}) {
                             Agregado {moment(p.createdAt).fromNow()}
                         </small>
                         </p>
-                        <p 
+                    {remove && (
+                    <p 
                         className='text-danger mb-2 pointer'
                         onClick={() =>removeFromCart(p._id)}
-                        >
-                    Eliminar
-                        </p>
+                    >
+                        Eliminar
+                    </p>
+                    )}
+
                 </div>
                                             
          </div>

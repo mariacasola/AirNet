@@ -20,6 +20,7 @@ import AdminRoute from "./components/routes/AdminRoute";
 import CategoriesList from "./pages/CategoriesList";
 import CategoryView from './pages/CategoryView';
 import Cart from "./pages/Cart";
+import AdminOrders from './pages/admin/Orders';
 
 
 
@@ -63,6 +64,8 @@ export default function App() {
             <Route 
               path='admin/product/update/:slug' 
               element={<AdminProductUpdate/>} />
+
+            <Route path='admin/orders' element={<AdminOrders/>} />    
             
           </Route>
 

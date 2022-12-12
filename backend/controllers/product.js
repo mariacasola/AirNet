@@ -279,6 +279,8 @@ export const processPayment = async (req, res) => {
                     payment: result,
                     buyer: req.user._id,
                 }).save();
+                // decrece la cantidad de productos cuando se compra
+                decrementQuantity(cart)
                 res.json({ok:true});
             } else {
                 res.status(500).send(error);
@@ -289,4 +291,23 @@ export const processPayment = async (req, res) => {
     }
 };
 
+
+const decrementQuantity = async (cart) => {
+    try {
+        // mongodb consulta
+        const bulkOps = cart.map ((item) => {
+            return {
+                updateOne: {
+                    filter: { _id: item._id},
+                    update: { $inc: {quantity: -0, sold:+1}},
+                },
+            };
+        });
+        const update = await Product.bulkWrite(bulkOps, {});
+        console.log('culk updated', updated);
+
+    } catch (err){
+        console.log(err)
+    }
+};
 
