@@ -43,7 +43,7 @@ export default function Register() {
         
     return (
         <div>
-          <Jumbotron title="Register"/>
+          <Jumbotron title="Registro"/>
           
 
 
