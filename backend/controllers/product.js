@@ -306,7 +306,7 @@ const decrementQuantity = async (cart) => {
             };
         });
         const update = await Product.bulkWrite(bulkOps, {});
-        console.log('culk updated', updated);
+        console.log('blk updated', update);
 
     } catch (err){
         console.log(err)
@@ -318,7 +318,32 @@ export const orderStatus = async (req, res) => {
     try {
         const {orderId} = req.params;
         const { status} = req.body;
-        const order = await Order.findByIdAndUpdate(orderId, {status});
+        const order = await Order.findByIdAndUpdate(
+            orderId, 
+            {status},
+            {new: true}
+            ).populate("buyer", 'email name');
+
+        // mandar email
+
+
+        // preparar el email
+        const emailData= {
+            from: process.env.EMAIL_FROM,
+            to: order.buyer.email,
+            subject: 'Estado del pedido',
+            html: `
+            <h1> Hola ${order.buyer.name}, el estado de tu pedido es: <span style='color:red;'>${order.status}</span></h1>
+            <p>Visita <a href='${process.env.CLIENT_URL}/dashboard/user/orders'> tu plataforma</a> para mas detalles</p>
+            `,
+        };
+
+        try{
+            await sgMail.send(emailData)
+        } catch (err){
+            console.log(err)
+        }
+
         res.json(order);
     } catch (err){
         console.log(err);
