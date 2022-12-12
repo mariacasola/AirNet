@@ -311,3 +311,14 @@ const decrementQuantity = async (cart) => {
     }
 };
 
+
+export const orderStatus = async (req, res) => {
+    try {
+        const {orderId} = req.params;
+        const { status} = req.body;
+        const order = await Order.findByIdAndUpdate(orderId, {status});
+        res.json(order);
+    } catch (err){
+        console.log(err);
+    }
+};
