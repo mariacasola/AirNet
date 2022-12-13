@@ -62,7 +62,7 @@ export default function UserProfile(){
 
     return (
         <>
-            <Jumbotron title={`Holagit  ${auth?.user?.name}`} subTitle='Plataforma'
+            <Jumbotron title={`Hola  ${auth?.user?.name}`} subTitle='Plataforma'
             />
 
             <div className="container-fluid">
