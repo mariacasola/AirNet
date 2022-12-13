@@ -73,7 +73,7 @@ export default function AdminProduct(){
 
     return (
         <>
-            <Jumbotron title={`Holis ${auth?.user?.name}`} subTitle='Plataforma de Administrador'
+            <Jumbotron title={`Holas ${auth?.user?.name}`} subTitle='Plataforma de Administrador'
             />
 
             <div className="container-fluid">
